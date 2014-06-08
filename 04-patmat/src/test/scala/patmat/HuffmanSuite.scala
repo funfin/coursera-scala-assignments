@@ -17,6 +17,7 @@ class HuffmanSuite extends FunSuite {
   test("weight of a larger tree") {
     new TestTrees {
       assert(weight(t1) === 5)
+      assert(weight(t2) === 9)
     }
   }
 
@@ -32,6 +33,7 @@ class HuffmanSuite extends FunSuite {
 
   test("makeOrderedLeafList for some frequency table") {
     assert(makeOrderedLeafList(List(('t', 2), ('e', 1), ('x', 3))) === List(Leaf('e',1), Leaf('t',2), Leaf('x',3)))
+    assert(makeOrderedLeafList(List(('b', 2), ('a', 3), ('c', 1))) === List(Leaf('c',1), Leaf('b',2), Leaf('a',3)))
   }
 
   test("combine of some leaf list") {
@@ -43,5 +45,21 @@ class HuffmanSuite extends FunSuite {
     new TestTrees {
       assert(decode(t1, encode(t1)("ab".toList)) === "ab".toList)
     }
+  }
+
+  test("times(List('a', 'b', 'a'))"){
+    assert(times(List('a', 'b', 'a')).sortBy(f=> f._1) === List(('a', 2), ('b', 1)))
+  }
+
+  test("decode secretFrench"){
+    assert(decodedSecret === "huffmanestcool".toList)
+  }
+
+  test("encode secretFrench"){
+    assert(encode(frenchCode)("huffmanestcool".toList) === secret)
+  }
+
+  test("quickEncode secretFrench"){
+    assert(quickEncode(frenchCode)("huffmanestcool".toList) === secret)
   }
 }
